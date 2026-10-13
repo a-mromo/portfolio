@@ -1,0 +1,9 @@
+---
+// Visible only in `npm run dev`. Marks content that still needs to be added before publishing.
+const show = import.meta.env.DEV;
+---
+{show && (
+  <aside class="not-prose my-6 rounded-lg border border-amber-300 bg-amber-50 px-4 py-3 text-sm text-amber-900">
+    <strong class="font-semibold">To add:</strong> <slot />
+  </aside>
+)}

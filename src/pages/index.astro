@@ -1,0 +1,87 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+
+const work = (await getCollection('work', ({ data }) => import.meta.env.DEV || !data.draft))
+  .sort((a, b) => a.data.order - b.data.order);
+
+const skills = [
+  ['Design', 'User research, usability testing, prototyping, accessibility (WCAG 2.1), information architecture, mobile-first design'],
+  ['Code', 'Swift, SwiftUI, UIKit, HTML/CSS, JavaScript, Vue.js'],
+  ['AI-assisted workflow', 'Figma Make, Figma MCP, Google Stitch, Claude and Codex for fast prototyping and design-to-code'],
+  ['Analytics', 'Google Analytics, Looker Studio, A/B testing'],
+];
+const experience = [
+  ['Community Health Group', 'Product Designer', '2024 to now'],
+  ['GoShare', 'Product Designer / iOS Engineer', '2019 to 2023'],
+  ['Arkus Nexus', 'iOS Software Engineer', '2018 to 2019'],
+  ['WEX', 'Product Designer', '2017 to 2018'],
+  ['MagicStudio', 'iOS Software Engineer', '2017'],
+];
+---
+<Base>
+  <section class="pt-8">
+    <h1 class="text-4xl font-semibold leading-tight tracking-tight sm:text-5xl">
+      Senior Product Designer shipping mobile-first products from 0 to 1.
+    </h1>
+    <p class="mt-6 max-w-2xl text-lg leading-relaxed text-muted">
+      I'm Agustin. I have 7+ years of experience, most recently in healthcare. I prototype in SwiftUI and code, so I get from a messy problem to something real and accessible quickly. Before healthcare I worked on logistics and fintech.
+    </p>
+  </section>
+
+  <section id="work" class="mt-20 scroll-mt-8">
+    <h2 class="text-sm font-semibold uppercase tracking-wide text-muted">Selected work</h2>
+    <ul class="mt-6 divide-y divide-line border-y border-line">
+      {work.map((w) => (
+        <li>
+          <a href={`/work/${w.id}/`} class="group flex items-start justify-between gap-6 py-6">
+            <div>
+              <h3 class="text-xl font-semibold tracking-tight group-hover:text-accent">
+                {w.data.title}
+                {w.data.draft && <span class="ml-2 rounded bg-amber-100 px-2 py-0.5 align-middle text-xs font-medium text-amber-900">draft</span>}
+              </h3>
+              <p class="mt-1 text-muted">{w.data.summary}</p>
+              <p class="mt-2 text-sm text-muted">{w.data.company} · {w.data.role} · {w.data.period}</p>
+            </div>
+            {w.data.metric && <span class="shrink-0 rounded-full bg-white px-3 py-1 text-sm font-medium text-accent ring-1 ring-line">{w.data.metric}</span>}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section id="skills" class="mt-20 scroll-mt-8">
+    <h2 class="text-sm font-semibold uppercase tracking-wide text-muted">Skills and tools</h2>
+    <dl class="mt-6 space-y-4">
+      {skills.map(([k, v]) => (
+        <div class="grid gap-1 sm:grid-cols-[11rem_1fr]">
+          <dt class="font-medium">{k}</dt>
+          <dd class="text-muted">{v}</dd>
+        </div>
+      ))}
+    </dl>
+  </section>
+
+  <section class="mt-20">
+    <h2 class="text-sm font-semibold uppercase tracking-wide text-muted">Experience</h2>
+    <ul class="mt-6 space-y-3">
+      {experience.map(([c, r, p]) => (
+        <li class="flex flex-wrap justify-between gap-x-6">
+          <span><span class="font-medium">{c}</span> <span class="text-muted">· {r}</span></span>
+          <span class="text-muted">{p}</span>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section id="contact" class="mt-20 scroll-mt-8">
+    <h2 class="text-sm font-semibold uppercase tracking-wide text-muted">Contact</h2>
+    <p class="mt-6 text-lg">
+      <a class="text-accent underline underline-offset-4" href="mailto:agustinoromo@gmail.com">agustinoromo@gmail.com</a>
+    </p>
+    <p class="mt-3 flex gap-6 text-muted">
+      <a class="hover:text-ink" href="https://www.linkedin.com/in/agustinoromo/">LinkedIn</a>
+      <a class="hover:text-ink" href="https://github.com/a-mromo">GitHub</a>
+    </p>
+  </section>
+</Base>

@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://agustinmendoza.design/sitemap-index.xml
