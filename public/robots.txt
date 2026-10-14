@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://portfolio.agustinoromo.workers.dev/sitemap-index.xml
+Sitemap: https://agustinmendoza.net/sitemap-index.xml

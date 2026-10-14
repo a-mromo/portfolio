@@ -17,6 +17,6 @@ Cloudflare recommends Workers Static Assets over Pages for new projects. Config 
 1. Cloudflare dashboard > Workers & Pages > Create > Import a repository > connect `a-mromo/portfolio`.
 2. Build command: `npm run build`. Deploy command: `npx wrangler deploy`.
 3. Pushes to `main` publish. Pushes to other branches create preview builds.
-4. Custom domain: Worker > Settings > Domains & Routes > Add > Custom Domain. Then set `site` in `astro.config.mjs` and the Sitemap line in `public/robots.txt`.
+4. Custom domain (agustinmendoza.net): Worker > Settings > Domains & Routes > Add > Custom Domain. `site` in `astro.config.mjs` and the Sitemap line in `public/robots.txt` already point at it.
 
 Manual deploy from your machine: `npm run deploy` (requires `npx wrangler login` once).
