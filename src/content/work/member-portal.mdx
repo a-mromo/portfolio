@@ -1,10 +1,10 @@
 ---
-title: "Refreshing a health plan member portal"
+title: "Member portal, from concept to working web and iOS prototypes"
 company: Medi-Cal health plan
-role: Senior Product Designer
+role: Design engineer (design and code)
 period: 2026, in progress
-summary: "A refresh of a Medi-Cal member portal, from Figma to a working Angular front end: plain language, accessible by default, and white-label for two health plans, plus an iOS exploration."
-metric: "Live front-end demo"
+summary: "Zero to one on a Medi-Cal member portal: I took it from concept and research to a design system in Figma, then built working prototypes in code for web (Angular) and iOS (SwiftUI), white-label for two health plans."
+metric: "Web + iOS prototypes in code"
 order: 2
 draft: false
 ---
@@ -14,7 +14,15 @@ import Callout from '../../components/Callout.astro';
 
 The member portal is where Medi-Cal members go to print their ID card, change their doctor, update their contact info and get help. The current portal was built years ago in ASP.NET WebForms. It works, but it reads like a back office: small text, jargon and buried tasks.
 
-This is an in-progress project at the health plan where I work. I'm the designer, and I took it from a review of the old system to Figma screens, a design system, plain-language copy in English and Spanish, a working Angular front end and a native iOS prototype.
+This is an in-progress project at the health plan where I work, and I owned it end to end, from concept to code. I didn't hand off a Figma file; I designed the product and then built it, so the prototypes people review behave like the real thing.
+
+<Callout label="What I owned">
+- **Concept and research:** read the old portal's code to map every rule members rely on, and defined who the portal is for.
+- **Design:** Figma screens for mobile and desktop, a token-based design system, and plain-language copy in English and Spanish.
+- **Web prototype in code:** an Angular front end covering ten flows, white-label for two plans from one codebase.
+- **iOS prototype in code:** a native SwiftUI app built from the same tokens, copy and mock data.
+- **Tooling:** a build step that turns one token file into CSS, SCSS and Swift and fails if contrast drops below WCAG AA.
+</Callout>
 
 <Callout label="Try it">[Open the interactive demo →](/work/member-portal/demo/) Sign in with anything, then use the "Demo brand" switch at the bottom right to see the same portal as a second health plan.</Callout>
 
@@ -61,11 +69,50 @@ The same tokens power a **white-label** setup: a second health plan uses the sam
 
 ![The same Home page in the second plan's brand: teal instead of purple, with its own logo](/work/member-portal/img/home-valley.png)
 
-## From Figma to code
+## The web prototype, in code
 
 I built the front end myself in Angular with the MDB (Bootstrap 5) UI kit, straight from the approved Figma prototype. It covers sign in, create an account, Home, ID card printing, the four-step Change my doctor flow, contact info, password, member incentives, alerts and health videos. Brand colors are CSS variables, so the two-plan switch is one setting, not a second codebase. All data is mock; the backend comes next.
 
-I also explored a native **iOS app** in SwiftUI. It follows Apple's conventions (tab bar, Dynamic Type, SF Symbols) while keeping the plan's color and the same accessibility rules.
+## The iOS prototype, in code
+
+I also built a native **iOS prototype** in SwiftUI from the same tokens, copy and mock data. It follows Apple's conventions (tab bar, Dynamic Type, SF Symbols, the system share and print sheets) while keeping the plan's color and the same accessibility rules: large text, 44pt targets, and color never used alone. These recordings are from the iPhone 17 simulator.
+
+### Home
+
+The same four tasks as the web, as large tappable rows, with secondary content below.
+
+<div class="not-prose my-8 grid gap-6 sm:grid-cols-2">
+  <figure>
+    <img src="/work/member-portal/ios/01-home.jpg" alt="iOS Home: Welcome, Nicholas, with task rows for Print my ID card, Change my doctor, Change contact info and Change password" class="w-full rounded-2xl border border-line" loading="lazy" />
+  </figure>
+  <figure>
+    <video src="/work/member-portal/ios/home.mp4" poster="/work/member-portal/ios/01-home.jpg" controls muted playsinline preload="none" class="w-full rounded-2xl border border-line" aria-label="Video: scrolling the iOS Home screen"></video>
+    <figcaption class="mt-2 text-sm text-muted">Scrolling Home</figcaption>
+  </figure>
+</div>
+
+### Change my doctor
+
+Pick who, choose a doctor, review the change side by side, confirm. The selected doctor gets a "Selected" label, not just a color change.
+
+<div class="not-prose my-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
+  <img src="/work/member-portal/ios/02-doctor-who.jpg" alt="Step 1: who needs a new doctor, with each family member's current doctor" class="w-full rounded-xl border border-line" loading="lazy" />
+  <img src="/work/member-portal/ios/04-doctor-selected.jpg" alt="Step 2: Dr. Ana Reyes selected, with distance, languages and phone, and a Continue button" class="w-full rounded-xl border border-line" loading="lazy" />
+  <img src="/work/member-portal/ios/05-doctor-review.jpg" alt="Step 3: review shows the current doctor and the new doctor for Nicholas" class="w-full rounded-xl border border-line" loading="lazy" />
+  <img src="/work/member-portal/ios/06-doctor-done.jpg" alt="Done: We got your doctor change, starting December 1" class="w-full rounded-xl border border-line" loading="lazy" />
+</div>
+
+<video src="/work/member-portal/ios/change-doctor.mp4" poster="/work/member-portal/ios/02-doctor-who.jpg" controls muted playsinline preload="none" class="not-prose mx-auto my-8 w-full max-w-xs rounded-2xl border border-line" aria-label="Video: the full Change my doctor flow on iOS"></video>
+
+### Print my ID card
+
+Pick one person or the whole family, and the app builds a print-ready sheet per person: card front, back and clinic details, ready for the system print or share sheet.
+
+<div class="not-prose my-8 grid gap-6 sm:grid-cols-3">
+  <img src="/work/member-portal/ios/08-print-all-selected.jpg" alt="All family members selected, with a Print 3 ID cards button" class="w-full rounded-xl border border-line" loading="lazy" />
+  <img src="/work/member-portal/ios/10-print-preview.jpg" alt="System print options with a preview of each family member's ID card sheet" class="w-full rounded-xl border border-line" loading="lazy" />
+  <video src="/work/member-portal/ios/print-id-card.mp4" poster="/work/member-portal/ios/08-print-all-selected.jpg" controls muted playsinline preload="none" class="w-full rounded-xl border border-line" aria-label="Video: printing ID cards for the whole family on iOS"></video>
+</div>
 
 ## Process
 
