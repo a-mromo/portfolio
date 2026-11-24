@@ -2,9 +2,14 @@
   "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "portfolio",
   "compatibility_date": "2026-10-13",
+  // Password gate for protected case studies (worker/index.js). Only these paths run the
+  // Worker; everything else is served straight from static assets.
+  "main": "./worker/index.js",
   "assets": {
     "directory": "./dist",
-    "not_found_handling": "404-page"
+    "binding": "ASSETS",
+    "not_found_handling": "404-page",
+    "run_worker_first": ["/work/chg-member-portal", "/work/chg-member-portal/*", "/__case-study-login"]
   },
   "observability": { "enabled": true }
 }
