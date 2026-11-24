@@ -1,7 +1,7 @@
 // Password gate for protected case studies. Everything else is served straight
 // from static assets (see run_worker_first in wrangler.jsonc).
 // Set the password with:  npx wrangler secret put CASE_STUDY_PASSWORD
-const PROTECTED = ['/work/chg-member-portal'];
+const PROTECTED = ['/work/member-portal'];
 const COOKIE = 'cs_access';
 const MAX_AGE = 60 * 60 * 24 * 30; // 30 days
 

@@ -9,7 +9,7 @@
     "directory": "./dist",
     "binding": "ASSETS",
     "not_found_handling": "404-page",
-    "run_worker_first": ["/work/chg-member-portal", "/work/chg-member-portal/*", "/__case-study-login"]
+    "run_worker_first": ["/work/member-portal", "/work/member-portal/*", "/__case-study-login"]
   },
   "observability": { "enabled": true }
 }

@@ -1,0 +1,78 @@
+---
+title: "Refreshing a health plan member portal"
+company: Medi-Cal health plan
+role: Senior Product Designer
+period: 2026, in progress
+summary: "A refresh of a Medi-Cal member portal, from Figma to a working Angular front end: plain language, accessible by default, and white-label for two health plans, plus an iOS exploration."
+metric: "Live front-end demo"
+order: 2
+draft: false
+---
+import Callout from '../../components/Callout.astro';
+
+*This is client work under NDA. The plan names and logos here are made up ("Harbor Health Plan" and "Valley Health Plan"), and all data is mock.*
+
+The member portal is where Medi-Cal members go to print their ID card, change their doctor, update their contact info and get help. The current portal was built years ago in ASP.NET WebForms. It works, but it reads like a back office: small text, jargon and buried tasks.
+
+This is an in-progress project at the health plan where I work. I'm the designer, and I took it from a review of the old system to Figma screens, a design system, plain-language copy in English and Spanish, a working Angular front end and a native iOS prototype.
+
+<Callout label="Try it">[Open the interactive demo →](/work/member-portal/demo/) Sign in with anything, then use the "Demo brand" switch at the bottom right to see the same portal as a second health plan.</Callout>
+
+![Home page of the refreshed member portal, with four task cards: Print my ID card, Change my doctor, Change contact info and Change password](/work/member-portal/img/home.png)
+
+## Who it's for
+
+Many members are older adults, Spanish speakers, or are using the portal on a phone at a clinic's front desk. They come with one job: print my card, change my doctor, call someone. So every design decision was measured against "can someone do this in a hurry, in their language, with tired eyes?"
+
+## Principles
+
+- **Plain language.** About a 6th-grade reading level. "Pick a new main doctor for you or your family," not "Primary Care Physician assignment."
+- **English and Spanish as equals.** Every string exists in both, kept in parity by the build. Spanish uses *usted* and gender-neutral phrasing.
+- **Accessible by default, not by audit.** 18px body text, 44px minimum touch targets, 2px input borders, AA contrast checked automatically, and color is never the only signal.
+- **One brand color.** The plan's primary color is the only color in the UI. Everything else comes from a neutral Bootstrap-based kit.
+
+## Key decisions
+
+### Home asks "What would you like to do today?"
+
+Instead of a dashboard, Home leads with the four things members come for, each as a card with a plain sentence and one clear button. Secondary content (incentives, health videos, a health check) sits below under "More for you", so it's there without competing.
+
+### One flow for the whole family
+
+Most accounts cover a household. Change my doctor and Print my ID card both start with "Who?", with an "All family members" option, and show each person's member ID and current doctor right there. A parent can change three doctors or print three cards in one pass, instead of repeating the flow per person.
+
+![Change my doctor, step 1: pick who needs a new doctor, with each family member's current doctor shown](/work/member-portal/img/doctor.png)
+
+### Change my doctor in four short steps
+
+Who → find a doctor → review → done. Each step is its own page with a clear back link, and the review page shows every person and their new doctor together. Nothing is sent until the member confirms.
+
+### Print the card, not a PDF hunt
+
+Members pick whose cards they need and the printer screen opens with those cards laid out on one sheet.
+
+![Print my ID card: pick one or more family members, then print](/work/member-portal/img/idcard.png)
+
+## A design system that ships
+
+Tokens live in one JSON file. A script turns them into CSS, SCSS and Swift, and checks every text and background pairing against WCAG AA. The build fails if a color change breaks contrast.
+
+The same tokens power a **white-label** setup: a second health plan uses the same screens with its own color and logo. In Figma it's one variable mode; in the front end it's one setting.
+
+![The same Home page in the second plan's brand: teal instead of purple, with its own logo](/work/member-portal/img/home-valley.png)
+
+## From Figma to code
+
+I built the front end myself in Angular with the MDB (Bootstrap 5) UI kit, straight from the approved Figma prototype. It covers sign in, create an account, Home, ID card printing, the four-step Change my doctor flow, contact info, password, member incentives, alerts and health videos. Brand colors are CSS variables, so the two-plan switch is one setting, not a second codebase. All data is mock; the backend comes next.
+
+I also explored a native **iOS app** in SwiftUI. It follows Apple's conventions (tab bar, Dynamic Type, SF Symbols) while keeping the plan's color and the same accessibility rules.
+
+## Process
+
+More than 130 design decisions are written down in a decisions log, each with the reason behind it. Behavior and validation rules came from a careful read of the old portal's code, so the refresh keeps what members rely on and drops only the UI.
+
+<Callout label="Status">Stakeholders reviewed the designs and the working front end, responded well, and the project is moving forward.</Callout>
+
+## What I'd do next
+
+Usability testing with real members before the build goes further, especially older adults and Spanish speakers on their own phones. The biggest open question is whether the household flows (picking several people at once) feel natural to them, or whether one person at a time is easier to trust.
